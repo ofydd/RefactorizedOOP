@@ -107,19 +107,18 @@ istream& operator>>(istream& is, Produs* produs)
 
 void Produs::writeBinary(ofstream& ofs) //virtual
 {
-	ofs.write(reinterpret_cast<char*>(&this->idProdus), sizeof(this->idProdus));
-	ofs.write(reinterpret_cast<char*>(&this->stoc), sizeof(this->stoc));
-	ofs.write(reinterpret_cast<char*>(&this->pret), sizeof(this->pret));
-	ofs.write(reinterpret_cast<char*>(&this->statusProdus), sizeof(this->statusProdus));
+	ofs.write((char*)&idProdus, sizeof(idProdus));
+	ofs.write((char*)&stoc, sizeof(stoc));
+	ofs.write((char*)&pret, sizeof(pret));
+	ofs.write((char*)&statusProdus, sizeof(statusProdus));
 }
 
 void Produs::readBinary(ifstream& ifs)
 {
-
-	ifs.read(reinterpret_cast<char*>(&this->idProdus), sizeof(this->idProdus));
-	ifs.read(reinterpret_cast<char*>(&this->stoc), sizeof(this->stoc));
-	ifs.read(reinterpret_cast<char*>(&this->pret), sizeof(this->pret));
-	ifs.read(reinterpret_cast<char*>(&this->statusProdus), sizeof(this->statusProdus));
+	ifs.read((char*)&idProdus, sizeof(idProdus));
+	ifs.read((char*)&stoc, sizeof(stoc));
+	ifs.read((char*)&pret, sizeof(pret));
+	ifs.read((char*)&statusProdus, sizeof(statusProdus));
 }
 
 

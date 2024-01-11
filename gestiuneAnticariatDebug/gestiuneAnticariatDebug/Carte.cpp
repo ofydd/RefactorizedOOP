@@ -263,8 +263,22 @@ istream& operator>>(istream& is, Carte* c)
 
 void Carte::writeBinary(ofstream& ofs) //virtual override
 {
-
+	Produs::writeBinary(ofs);
+	int length = strlen(titlu);
+	ofs.write(reinterpret_cast<char*>(&length), sizeof(length));
+	ofs.write(titlu, length + 1);
+	length = strlen(autor);
+	ofs.write((char*)&length, sizeof(length));
+	ofs.write(autor, length + 1);
+	length = strlen(editura);
+	ofs.write((char*)&length, sizeof(length));
+	ofs.write(editura, length + 1);
+	ofs.write((char*)&numarPagini, sizeof(numarPagini));
+	ofs.write((char*)&anAparitie, sizeof(anAparitie));
+	ofs.write((char*)&gen_literar, sizeof(gen_literar));
 }
+
+
 
 ofstream& operator<<(ofstream& ofs, Carte* c)
 {
@@ -274,45 +288,26 @@ ofstream& operator<<(ofstream& ofs, Carte* c)
 
 void Carte::readBinary(ifstream& ifs) // virtual override
 {
-	/*
 
-	int length;
-	ifs.read(reinterpret_cast<char*>(&c.idComanda), sizeof(c.idComanda));
-	ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
-	if(c.numeClient)
-		delete[] c.numeClient;
-	c.numeClient = new char[length + 1];
-	ifs.read(c.numeClient, length + 1);
-	ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
-	if(c.prenumeClient)
-		delete[] c.prenumeClient;
-	c.prenumeClient = new char[length + 1];
-	ifs.read(c.prenumeClient, length + 1);
-	ifs.read(reinterpret_cast<char*>(&c.valoareComanda), sizeof(c.valoareComanda));
-	ifs.read(reinterpret_cast<char*>(&c.numarProduse), sizeof(c.numarProduse));
-
-	for (int i = 0; i < c.numarProduse; i++)
-		ifs >> c.produse[i];
-
-	char* titlu;
-	char* autor;
-	char* editura;
-	unsigned int numarPagini;
-	unsigned int anAparitie;
-	genLiterar gen_literar;
-	*/
-
+	Produs::readBinary(ifs);
 	int length = 0;
-	ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
+	ifs.read((char*)&length, sizeof(length));
 	if (this->titlu)
 		delete[] this->titlu;
 	this->titlu = new char[length + 1];
-	ifs.read(this->titlu, length + 1);
-	ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
+	ifs.read(titlu, length + 1);
+	ifs.read((char*)&length, sizeof(length));
 	if (this->autor)
 		delete[] this->autor;
-	ifs.read(this->autor, sizeof(autor));
-	ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
+	ifs.read(autor, sizeof(autor));
+	ifs.read((char*)&length, sizeof(length));
+	if (this->editura)
+		delete[] editura;
+	editura = new char[length + 1];
+	ifs.read(editura, length + 1);
+	ifs.read((char*)&numarPagini, sizeof(numarPagini));
+	ifs.read((char*)&anAparitie, sizeof(anAparitie));
+	ifs.read((char*)&gen_literar, sizeof(gen_literar));
 
 }
 

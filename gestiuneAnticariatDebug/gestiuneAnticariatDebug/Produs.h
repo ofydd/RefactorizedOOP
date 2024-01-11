@@ -3,7 +3,9 @@
 
 class Produs
 {
-
+public:
+	virtual void writeBinary(ofstream& ofs);
+	virtual void readBinary(ifstream& ifs);
 protected:
 	unsigned int idProdus;
 	unsigned int stoc;
@@ -34,9 +36,9 @@ public:
 	virtual void read(istream& is);
 	friend istream& operator>>(istream& is, Produs* produs);
 	
-	virtual void writeBinary(ofstream& ofs);
+	
 	friend ofstream& operator<<(ofstream& ofs, Produs* p);
 
-	virtual void readBinary(ifstream& ifs);
+	
 	friend ifstream& operator>>(ifstream& ifs, Produs* p);
 };

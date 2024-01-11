@@ -1,7 +1,5 @@
 ﻿  Carte.cpp
-  Comanda.cpp
-  Produs.cpp
-  Vinyl.cpp
-  gestiuneAnticariatDebug.cpp
-  Generating Code...
-  gestiuneAnticariatDebug.vcxproj -> F:\POO\gestiuneAnticariatDebug\x64\Debug\gestiuneAnticariatDebug.exe
+F:\POO\RefactorizedOOP\gestiuneAnticariatDebug\gestiuneAnticariatDebug\Carte.cpp(291,28): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\POO\RefactorizedOOP\gestiuneAnticariatDebug\gestiuneAnticariatDebug\Carte.cpp(294,24): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+F:\POO\RefactorizedOOP\gestiuneAnticariatDebug\gestiuneAnticariatDebug\Carte.cpp(297,26): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  gestiuneAnticariatDebug.vcxproj -> F:\POO\RefactorizedOOP\gestiuneAnticariatDebug\x64\Debug\gestiuneAnticariatDebug.exe
