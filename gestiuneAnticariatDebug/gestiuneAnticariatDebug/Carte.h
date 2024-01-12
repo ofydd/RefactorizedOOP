@@ -1,6 +1,5 @@
 #pragma once
 #include "Produs.h"
-#include "dependencies.h"
 
 class Carte : public Produs
 {

@@ -15,6 +15,7 @@ Carte::Carte() : Produs()
 		delete[] this->autor;
 	}
 	this->autor = new char[10];
+	//Eroare aici:
 	strcpy_s(this->autor, 10, "undefined");
 
 	if (this->editura != NULL)

@@ -9,7 +9,7 @@ int main()
 		Vinyl* v = new Vinyl(2, 1, 25, Status::Activ, "Mugur de fluier", "Phoenix", 7, 131, genMuzical::Rock);
 		Produs* p1 = new Produs(101, 101, 10, Status::Activ);
 
-		string filename = "testCarteBinar.bin";
+		string filename = "testBinarBun.dat";
 		
 		ofstream ofs;
 		ofs.open(filename, ios::binary | ios::out);
@@ -18,22 +18,21 @@ int main()
 		else
 			cout << "A mers";
 		
-
-		
-		
 		
 		ifstream ifs;
+		
+		
+		p1->writeBinary(ofs);
+		ofs.close();
+
 		ifs.open(filename, ios::binary | ios::in);
 		if (!ifs.is_open()) {
 			cout << "N-am putut sa deschid";
 		}
 		else cout << "Am deschis";
-		
-		ofs << c;
-		Carte* cBinar = new Carte();
-		ifs >> cBinar;
 
-		cout << cBinar;
+		Produs * pCitit = new Produs();
+		p1->readBinary(ifs);
 
 		
 		

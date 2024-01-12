@@ -107,18 +107,36 @@ istream& operator>>(istream& is, Produs* produs)
 
 void Produs::writeBinary(ofstream& ofs) //virtual
 {
-	ofs.write((char*)&idProdus, sizeof(idProdus));
-	ofs.write((char*)&stoc, sizeof(stoc));
-	ofs.write((char*)&pret, sizeof(pret));
-	ofs.write((char*)&statusProdus, sizeof(statusProdus));
+	ofs.write((char*)&this->idProdus, sizeof(this->idProdus));
+	cout << endl << idProdus << " " <<  sizeof(idProdus) << endl;
+	ofs.write((char*)&this->stoc, sizeof(this->stoc));
+	ofs.write((char*)&this->pret, sizeof(this->pret));
+	ofs.write((char*)&this->statusProdus, sizeof(this->statusProdus));
 }
 
 void Produs::readBinary(ifstream& ifs)
 {
-	ifs.read((char*)&idProdus, sizeof(idProdus));
-	ifs.read((char*)&stoc, sizeof(stoc));
-	ifs.read((char*)&pret, sizeof(pret));
-	ifs.read((char*)&statusProdus, sizeof(statusProdus));
+	/*
+	unsigned int idProdus;
+	unsigned int stoc;
+	float pret;
+	Status statusProdus;
+	*/
+	unsigned int idProdusTemp;
+	ifs.read((char*)&idProdusTemp, sizeof(idProdusTemp));
+	cout << "idProdus citit: " << idProdusTemp << endl;
+
+	unsigned int stocTemp;
+	ifs.read((char*)&stocTemp, sizeof(stocTemp));
+	cout << "stoc citit: " << stocTemp << endl;
+
+	float pretTemp;
+	ifs.read((char*)&pretTemp, sizeof(pretTemp));
+	cout << "pret citit: " << pretTemp;
+
+	Status statusTemp;
+	ifs.read((char*)&statusTemp, sizeof(statusTemp));
+	cout << "status citit: " << statusTemp;
 }
 
 

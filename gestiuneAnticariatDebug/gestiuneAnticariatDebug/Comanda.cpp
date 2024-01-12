@@ -26,11 +26,12 @@ ifstream& operator>>(ifstream& ifs, Comanda& c)
 	string filename = "comenzi\\" + to_string(c.idComanda) + ".bin";
 	ifs.open(filename, ios::binary);
 	cout << "citesc din " << filename << endl;
-	//Probabil da eroare din cauza operatorului din cadrul Produs::...
-	//BIG TODO: Maine dimineata se depaneaza iar.
 
+	//BIG TODO: De schimbat cu variabile temporare;
 	int length;
-	ifs.read(reinterpret_cast<char*>(&c.idComanda), sizeof(c.idComanda));
+	unsigned int idComandaTemp;
+	ifs.read(reinterpret_cast<char*>(&idComandaTemp), sizeof(c.idComanda));
+	cout << idComandaTemp;
 	ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
 	if(c.numeClient)
 		delete[] c.numeClient;
