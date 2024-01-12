@@ -9,7 +9,18 @@ int main()
 		Vinyl* v = new Vinyl(2, 1, 25, Status::Activ, "Mugur de fluier", "Phoenix", 7, 131, genMuzical::Rock);
 		Produs* p1 = new Produs(101, 101, 10, Status::Activ);
 	
-		string filename = "testVinylBinar1.bin";
+		Comanda co;
+		co.setIDComanda(1234);
+		co.setNumeClient("Oprea");
+		co.setPrenumeClient("Ovidiu");
+		co.setValoareComanda(100);
+
+		co += c;
+		co += v;
+
+		//cout << co;
+
+		string filename = "testComandaBinar1.bin";
 		ofstream ofs;
 		ofs.open(filename, ios::out | ios::binary);
 		if (!ofs.is_open()) {
@@ -17,7 +28,7 @@ int main()
 		}
 		else
 		{
-			v->writeBinary(ofs);
+			co.writeBinary(ofs);
 			ofs.close();
 		}
 
@@ -29,8 +40,7 @@ int main()
 		}
 		else
 		{
-			Vinyl* vBinar = new Vinyl();
-			vBinar->readBinary(ifs);
+			co.readBinary(ifs);
 			ifs.close();
 		}
 		

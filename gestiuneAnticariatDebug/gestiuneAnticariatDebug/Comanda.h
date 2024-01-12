@@ -14,7 +14,8 @@ public:
 
 	friend ofstream& operator<<(ofstream& ofs, Comanda& c);
 	friend ifstream& operator>>(ifstream& ifs, Comanda& c);
-
+	void writeBinary(ofstream& ofs);
+	void readBinary(ifstream& ifs);
 
 	Comanda();
 

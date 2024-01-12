@@ -50,13 +50,13 @@ public:
 	
 	friend istream& operator>>(istream& is, Carte* c);
 
-	virtual void writeBinary(ofstream& ofs) override;
+	//virtual void writeBinary(ofstream& ofs) override;
 
-	friend ofstream& operator<<(ofstream& ofs, Carte* c);
+	//friend ofstream& operator<<(ofstream& ofs, Carte* c);
 
-	void readBinary(ifstream& ifs);
+	//void readBinary(ifstream& ifs);
 
-	friend ifstream& operator>>(ifstream& ifs, Carte* c);
+	//friend ifstream& operator>>(ifstream& ifs, Carte* c);
 	~Carte();
 
 };

@@ -189,69 +189,69 @@ istream& operator>>(istream& is, Vinyl* vinyl)
 	vinyl->read(is);
 	return is;
 }
-
-void Vinyl::writeBinary(ofstream& ofs) //virtual override
-{
-	/*
-	char* numeAlbum;
-	char* artist;
-	unsigned int numarPiese;
-	float durata;
-	genMuzical gen_muzical;
-	*/
-	Produs::writeBinary(ofs);
-	int length = strlen(numeAlbum);
-	ofs.write(reinterpret_cast<char*>(&length), sizeof(length));
-	ofs.write(numeAlbum, length + 1);
-
-	length = strlen(artist);
-	ofs.write(reinterpret_cast<char*>(&length), sizeof(length));
-	ofs.write(artist, length + 1);
-
-	ofs.write(reinterpret_cast<char*>(&numarPiese), sizeof(numarPiese));
-	ofs.write(reinterpret_cast<char*>(&durata), sizeof(durata));
-	ofs.write(reinterpret_cast<char*>(&gen_muzical), sizeof(gen_muzical));
-}
-
-
-
-void Vinyl::readBinary(ifstream& ifs)  //virtual override
-{
-	Produs* p = Produs::readBinary(ifs);
-	int length = 0;
-
-	ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
-	char* numeAlbumTemp = new char[length + 1];
-	ifs.read(numeAlbumTemp, length + 1);
-
-	ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
-	char* artistTemp = new char[length + 1];
-	ifs.read(artistTemp, length + 1);
-
-	unsigned int numarPieseTemp = 0;
-	ifs.read(reinterpret_cast<char*>(&numarPieseTemp), sizeof(numarPieseTemp));
-	
-	float durataTemp = 0;
-	ifs.read(reinterpret_cast<char*>(&durataTemp), sizeof(durataTemp));
-
-	genMuzical gen_muzicalTemp;
-	ifs.read(reinterpret_cast<char*>(&gen_muzicalTemp), sizeof(gen_muzicalTemp));
-
-	Vinyl* v = new Vinyl(p->getIDProdus(), p->getStoc(), p->getPret(), p->getStatusProdus(),
-						numeAlbumTemp, artistTemp, numarPieseTemp, durataTemp, gen_muzicalTemp);
-	cout << "Citesc vinyl-ul din fisier: " << endl << v << endl;
-}
-
- ofstream& operator<<(ofstream& ofs, Vinyl* vinyl)
-{
-	vinyl->writeBinary(ofs);
-	return ofs;
-}
-ifstream& operator>>(ifstream& ifs, Vinyl* v)
-{
-	v->readBinary(ifs);
-	return ifs;
-}
+//
+//void Vinyl::writeBinary(ofstream& ofs) //virtual override
+//{
+//	/*
+//	char* numeAlbum;
+//	char* artist;
+//	unsigned int numarPiese;
+//	float durata;
+//	genMuzical gen_muzical;
+//	*/
+//	Produs::writeBinary(ofs);
+//	int length = strlen(numeAlbum);
+//	ofs.write(reinterpret_cast<char*>(&length), sizeof(length));
+//	ofs.write(numeAlbum, length + 1);
+//
+//	length = strlen(artist);
+//	ofs.write(reinterpret_cast<char*>(&length), sizeof(length));
+//	ofs.write(artist, length + 1);
+//
+//	ofs.write(reinterpret_cast<char*>(&numarPiese), sizeof(numarPiese));
+//	ofs.write(reinterpret_cast<char*>(&durata), sizeof(durata));
+//	ofs.write(reinterpret_cast<char*>(&gen_muzical), sizeof(gen_muzical));
+//}
+//
+//
+//
+//void Vinyl::readBinary(ifstream& ifs)  //virtual override
+//{
+//	Produs* p = Produs::readBinary(ifs);
+//	int length = 0;
+//
+//	ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
+//	char* numeAlbumTemp = new char[length + 1];
+//	ifs.read(numeAlbumTemp, length + 1);
+//
+//	ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
+//	char* artistTemp = new char[length + 1];
+//	ifs.read(artistTemp, length + 1);
+//
+//	unsigned int numarPieseTemp = 0;
+//	ifs.read(reinterpret_cast<char*>(&numarPieseTemp), sizeof(numarPieseTemp));
+//	
+//	float durataTemp = 0;
+//	ifs.read(reinterpret_cast<char*>(&durataTemp), sizeof(durataTemp));
+//
+//	genMuzical gen_muzicalTemp;
+//	ifs.read(reinterpret_cast<char*>(&gen_muzicalTemp), sizeof(gen_muzicalTemp));
+//
+//	Vinyl* v = new Vinyl(p->getIDProdus(), p->getStoc(), p->getPret(), p->getStatusProdus(),
+//						numeAlbumTemp, artistTemp, numarPieseTemp, durataTemp, gen_muzicalTemp);
+//	cout << "Citesc vinyl-ul din fisier: " << endl << v << endl;
+//}
+//
+// ofstream& operator<<(ofstream& ofs, Vinyl* vinyl)
+//{
+//	vinyl->writeBinary(ofs);
+//	return ofs;
+//}
+//ifstream& operator>>(ifstream& ifs, Vinyl* v)
+//{
+//	v->readBinary(ifs);
+//	return ifs;
+//}
 
 Vinyl::~Vinyl()
 {

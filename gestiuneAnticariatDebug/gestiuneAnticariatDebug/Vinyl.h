@@ -40,11 +40,11 @@ public:
 	virtual void read(istream& is) override;
 	friend istream& operator>>(istream& is, Vinyl* vinyl);
 
-	virtual void writeBinary(ofstream& ofs) override;
+	/*virtual void writeBinary(ofstream& ofs) override;
 	friend ofstream& operator<<(ofstream& ofs, Vinyl* vinyl);
 	
 	void readBinary(ifstream& ifs);
-	friend ifstream& operator>>(ifstream& ifs, Vinyl* v);
+	friend ifstream& operator>>(ifstream& ifs, Vinyl* v);*/
 
 	~Vinyl();
 

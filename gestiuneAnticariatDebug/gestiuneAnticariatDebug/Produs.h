@@ -5,7 +5,7 @@ class Produs
 {
 public:
 	virtual void writeBinary(ofstream& ofs);
-	Produs* readBinary(ifstream& ifs);
+	Produs *readBinary(ifstream& ifs);
 protected:
 	unsigned int idProdus;
 	unsigned int stoc;
