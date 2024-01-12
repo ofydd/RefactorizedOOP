@@ -43,7 +43,7 @@ public:
 	virtual void writeBinary(ofstream& ofs) override;
 	friend ofstream& operator<<(ofstream& ofs, Vinyl* vinyl);
 	
-	virtual void readBinary(ifstream& ifs) override;
+	void readBinary(ifstream& ifs);
 	friend ifstream& operator>>(ifstream& ifs, Vinyl* v);
 
 	~Vinyl();

@@ -54,7 +54,7 @@ public:
 
 	friend ofstream& operator<<(ofstream& ofs, Carte* c);
 
-	virtual void readBinary(ifstream& ifs) override;
+	void readBinary(ifstream& ifs);
 
 	friend ifstream& operator>>(ifstream& ifs, Carte* c);
 	~Carte();

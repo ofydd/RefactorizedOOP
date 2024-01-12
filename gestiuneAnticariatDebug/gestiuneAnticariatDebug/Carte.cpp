@@ -269,14 +269,14 @@ void Carte::writeBinary(ofstream& ofs) //virtual override
 	ofs.write(reinterpret_cast<char*>(&length), sizeof(length));
 	ofs.write(titlu, length + 1);
 	length = strlen(autor);
-	ofs.write((char*)&length, sizeof(length));
+	ofs.write(reinterpret_cast<char*>(&length), sizeof(length));
 	ofs.write(autor, length + 1);
 	length = strlen(editura);
-	ofs.write((char*)&length, sizeof(length));
+	ofs.write(reinterpret_cast<char*>(&length), sizeof(length));
 	ofs.write(editura, length + 1);
-	ofs.write((char*)&numarPagini, sizeof(numarPagini));
-	ofs.write((char*)&anAparitie, sizeof(anAparitie));
-	ofs.write((char*)&gen_literar, sizeof(gen_literar));
+	ofs.write(reinterpret_cast<char*>(&numarPagini), sizeof(numarPagini));
+	ofs.write(reinterpret_cast<char*>(&anAparitie), sizeof(anAparitie));
+	ofs.write(reinterpret_cast<char*>(&gen_literar), sizeof(gen_literar));
 }
 
 
@@ -289,27 +289,39 @@ ofstream& operator<<(ofstream& ofs, Carte* c)
 
 void Carte::readBinary(ifstream& ifs) // virtual override
 {
-
-	Produs::readBinary(ifs);
+	Produs *p = Produs::readBinary(ifs);
 	int length = 0;
-	ifs.read((char*)&length, sizeof(length));
-	if (this->titlu)
-		delete[] this->titlu;
-	this->titlu = new char[length + 1];
-	ifs.read(titlu, length + 1);
-	ifs.read((char*)&length, sizeof(length));
-	if (this->autor)
-		delete[] this->autor;
-	ifs.read(autor, sizeof(autor));
-	ifs.read((char*)&length, sizeof(length));
-	if (this->editura)
-		delete[] editura;
-	editura = new char[length + 1];
-	ifs.read(editura, length + 1);
-	ifs.read((char*)&numarPagini, sizeof(numarPagini));
-	ifs.read((char*)&anAparitie, sizeof(anAparitie));
-	ifs.read((char*)&gen_literar, sizeof(gen_literar));
+	
+	ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
+	char* titluTemp = new char[length + 1];
+	ifs.read(titluTemp, length + 1);
 
+	ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
+	char* autorTemp = new char[length + 1];
+	ifs.read(autorTemp, length+1);
+
+	ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
+	char* edituraTemp = new char[length + 1];
+	ifs.read(edituraTemp, length + 1);
+
+	unsigned int numarPaginiTemp;
+	ifs.read(reinterpret_cast<char*>(&numarPaginiTemp), sizeof(numarPaginiTemp));
+
+	unsigned int anAparitieTemp;
+	ifs.read((char*)&anAparitieTemp, sizeof(anAparitieTemp));
+
+	genLiterar gen_literarTemp;
+	ifs.read((char*)&gen_literarTemp, sizeof(gen_literarTemp));
+
+	Carte* carteTemp = new Carte(p->getIDProdus(), p->getStoc(), p->getPret(), p->getStatusProdus(),
+		                         titluTemp, autorTemp, edituraTemp, numarPaginiTemp, anAparitieTemp, 
+		                         gen_literarTemp);
+	cout << carteTemp;
+
+	//Pentru ca vreau sa ma asigur ca se dezaloca memoria, desi 
+	// acest lucru ar trebui sa se intample automat la }.
+	p->~Produs();
+	carteTemp->~Carte();
 }
 
 ifstream& operator>>(ifstream& ifs, Carte* c)

@@ -108,13 +108,13 @@ istream& operator>>(istream& is, Produs* produs)
 void Produs::writeBinary(ofstream& ofs) //virtual
 {
 	ofs.write((char*)&this->idProdus, sizeof(this->idProdus));
-	cout << endl << idProdus << " " <<  sizeof(idProdus) << endl;
 	ofs.write((char*)&this->stoc, sizeof(this->stoc));
 	ofs.write((char*)&this->pret, sizeof(this->pret));
 	ofs.write((char*)&this->statusProdus, sizeof(this->statusProdus));
+	cout << "Am scris in produs." << endl;
 }
 
-void Produs::readBinary(ifstream& ifs)
+Produs* Produs::readBinary(ifstream& ifs)
 {
 	/*
 	unsigned int idProdus;
@@ -124,19 +124,20 @@ void Produs::readBinary(ifstream& ifs)
 	*/
 	unsigned int idProdusTemp;
 	ifs.read((char*)&idProdusTemp, sizeof(idProdusTemp));
-	cout << "idProdus citit: " << idProdusTemp << endl;
 
 	unsigned int stocTemp;
 	ifs.read((char*)&stocTemp, sizeof(stocTemp));
-	cout << "stoc citit: " << stocTemp << endl;
 
 	float pretTemp;
 	ifs.read((char*)&pretTemp, sizeof(pretTemp));
-	cout << "pret citit: " << pretTemp;
 
 	Status statusTemp;
 	ifs.read((char*)&statusTemp, sizeof(statusTemp));
-	cout << "status citit: " << statusTemp;
+
+	Produs* pTemp = new Produs(idProdusTemp, stocTemp, pretTemp, statusTemp);
+	cout << "Citesc produsul din fisierul binar: " << endl;
+	cout << pTemp << endl;
+	return pTemp;
 }
 
 
