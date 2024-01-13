@@ -1,114 +1,5 @@
 #include "Comanda.h"
 
-
-
-//ofstream& operator<<(ofstream& ofs, Comanda& c)
-//{
-//	string filename = "comenzi\\" + to_string(c.idComanda) + ".bin";
-//	ofs.open(filename, ios::binary);
-//	cout << "scriu in " << filename << endl;
-//	ofs.write(reinterpret_cast<char*>(&c.idComanda), sizeof(c.idComanda));
-//	int length = sizeof(c.numeClient);
-//	ofs.write((char*)&length, sizeof(length));
-//	ofs.write(c.numeClient, length+1);
-//	length = sizeof(c.prenumeClient);
-//	ofs.write((char*)&length, sizeof(length));
-//	ofs.write(c.prenumeClient, length+1);
-//	ofs.write(reinterpret_cast<char*>(&c.valoareComanda), sizeof(c.valoareComanda));
-//	ofs.write(reinterpret_cast<char*>(&c.numarProduse), sizeof(c.numarProduse));
-//	for (int i = 0; i < c.numarProduse; i++) {
-//		ofs << c.produse[i];
-//	}
-//	
-//	return ofs; //BIG TODO: Ne uitam peste asta maine dimineata.
-//}
-//
-//ifstream& operator>>(ifstream& ifs, Comanda& c)
-//{
-//	string filename = "comenzi\\" + to_string(c.idComanda) + ".bin";
-//	ifs.open(filename, ios::binary);
-//	cout << "citesc din " << filename << endl;
-//
-//	//BIG TODO: De schimbat cu variabile temporare;
-//	int length;
-//	unsigned int idComandaTemp;
-//	ifs.read(reinterpret_cast<char*>(&idComandaTemp), sizeof(c.idComanda));
-//	cout << idComandaTemp;
-//	ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
-//	if(c.numeClient)
-//		delete[] c.numeClient;
-//	c.numeClient = new char[length + 1];
-//	ifs.read(c.numeClient, length + 1);
-//	ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
-//	if(c.prenumeClient)
-//		delete[] c.prenumeClient;
-//	c.prenumeClient = new char[length + 1];
-//	ifs.read(c.prenumeClient, length + 1);
-//	ifs.read(reinterpret_cast<char*>(&c.valoareComanda), sizeof(c.valoareComanda));
-//	ifs.read(reinterpret_cast<char*>(&c.numarProduse), sizeof(c.numarProduse));
-//
-//	for (int i = 0; i < c.numarProduse; i++)
-//		ifs >> c.produse[i];
-//	return ifs;
-//}
-
-void Comanda::writeBinary(ofstream& ofs)
-{
-	ofs.write(reinterpret_cast<char*>(&idComanda), sizeof(idComanda));
-	
-	int length = strlen(numeClient);
-	ofs.write(reinterpret_cast<char*>(&length), sizeof(length));
-	ofs.write(numeClient, length + 1);
-
-	length = strlen(prenumeClient);
-	ofs.write(reinterpret_cast<char*>(&length), sizeof(length));
-	ofs.write(prenumeClient, length + 1);
-
-	ofs.write(reinterpret_cast<char*>(&valoareComanda), sizeof(valoareComanda));
-	ofs.write(reinterpret_cast<char*>(&numarProduse), sizeof(numarProduse));
-
-	for (int i = 0; i < numarProduse; i++) {
-		produse[i]->writeBinary(ofs);
-	}
-}
-
-void Comanda::readBinary(ifstream& ifs)
-{
-
-	int length;
-
-
-	unsigned int idComandaTemp;
-	ifs.read(reinterpret_cast<char*>(&idComandaTemp), sizeof(idComandaTemp));
-
-	char* numeClientTemp ;
-	ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
-	numeClientTemp = new char[length + 1];
-	ifs.read(numeClientTemp, length + 1);
-
-	ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
-	char* prenumeClientTemp = new char[length + 1];
-	ifs.read(prenumeClientTemp, length + 1);
-
-	float valoareComandaTemp;
-	ifs.read(reinterpret_cast<char*>(&valoareComandaTemp), sizeof(valoareComandaTemp));
-
-	int numarProduseTemp;
-	ifs.read(reinterpret_cast<char*>(&numarProduseTemp), sizeof(numarProduseTemp));
-
-	Produs** produseTemp = new Produs*[numarProduseTemp];
-
-	for (int i = 0; i < numarProduseTemp; i++)
-	{
-		produseTemp[i] = produse[i]->readBinary(ifs);
-	}
-
-	//Comanda(unsigned int, char*, char*, float, Produs**, int);
-	Comanda coTemp(idComandaTemp, numeClientTemp, prenumeClientTemp, valoareComandaTemp, produseTemp, numarProduseTemp);
-	cout << "Citit din fisier binar: " << endl;
-	cout << coTemp << endl;
-}
-
 Comanda::Comanda()
 {
 	this->idComanda = 0;
@@ -164,7 +55,7 @@ Comanda::Comanda(unsigned int idComanda, const char* numeClient, const char* pre
 			this->produse[i] = produse[i];
 		}
 	}
-		
+
 	else
 	{
 		this->numarProduse = 0;
@@ -324,6 +215,66 @@ istream& operator>>(istream& is, Comanda& c)
 
 	return is;
 }
+
+void Comanda::readBinary(ifstream& ifs)
+{
+
+	int length;
+
+
+	unsigned int idComandaTemp;
+	ifs.read(reinterpret_cast<char*>(&idComandaTemp), sizeof(idComandaTemp));
+
+	char* numeClientTemp;
+	ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
+	numeClientTemp = new char[length + 1];
+	ifs.read(numeClientTemp, length + 1);
+
+	ifs.read(reinterpret_cast<char*>(&length), sizeof(length));
+	char* prenumeClientTemp = new char[length + 1];
+	ifs.read(prenumeClientTemp, length + 1);
+
+	float valoareComandaTemp;
+	ifs.read(reinterpret_cast<char*>(&valoareComandaTemp), sizeof(valoareComandaTemp));
+
+	int numarProduseTemp;
+	ifs.read(reinterpret_cast<char*>(&numarProduseTemp), sizeof(numarProduseTemp));
+
+	Produs** produseTemp = new Produs * [numarProduseTemp];
+
+	for (int i = 0; i < numarProduseTemp; i++)
+	{
+		produseTemp[i] = produse[i]->readBinary(ifs);
+	}
+
+	//Comanda(unsigned int, char*, char*, float, Produs**, int);
+	Comanda coTemp(idComandaTemp, numeClientTemp, prenumeClientTemp, valoareComandaTemp, produseTemp, numarProduseTemp);
+	cout << "Citit din fisier binar: " << endl;
+	cout << coTemp << endl;
+}
+
+
+
+void Comanda::writeBinary(ofstream& ofs)
+{
+	ofs.write(reinterpret_cast<char*>(&idComanda), sizeof(idComanda));
+
+	int length = strlen(numeClient);
+	ofs.write(reinterpret_cast<char*>(&length), sizeof(length));
+	ofs.write(numeClient, length + 1);
+
+	length = strlen(prenumeClient);
+	ofs.write(reinterpret_cast<char*>(&length), sizeof(length));
+	ofs.write(prenumeClient, length + 1);
+
+	ofs.write(reinterpret_cast<char*>(&valoareComanda), sizeof(valoareComanda));
+	ofs.write(reinterpret_cast<char*>(&numarProduse), sizeof(numarProduse));
+
+	for (int i = 0; i < numarProduse; i++) {
+		produse[i]->writeBinary(ofs);
+	}
+}
+
 
 Comanda::~Comanda()
 {
