@@ -5,60 +5,60 @@ Tema proiectului: Sistem de gestiune pentru o librarie anticariat.
 Structura proiectului:  
 
 Clasa de baza este **Produs**, care contine:  
-  unsigned int **idProdus**  
-  unsigned int **stoc**  
-  float **pret**  
-  Status **statusProdus**  
+&emsp;unsigned int **idProdus**  
+&emsp;unsigned int **stoc**  
+&emsp;  float **pret**  
+&emsp;  Status **statusProdus**  
 
 Prima clasa derivata este **Carte**, care contine:  
-  char* **titlu**;  
-  char* **autor**;  
-  char* **editura**;  
-  unsigned int **numarPagini**  
-  unsigned int **anAparitie**  
-  genLiterar **gen_literar**  
+&emsp;  char* **titlu**;  
+&emsp;  char* **autor**;  
+&emsp;  char* **editura**;  
+&emsp;  unsigned int **numarPagini**  
+&emsp;  unsigned int **anAparitie**  
+&emsp;  genLiterar **gen_literar**  
 
 Cea de-a doua clasa derivata este **Vinyl**, care contine:  
-  char* **numeAlbum**  
-  char* **artist**  
-  unsigned int **numarPiese**  
-  float **durata**  
-  genMuzical **gen_muzical**  
+&emsp;  char* **numeAlbum**  
+&emsp;  char* **artist**  
+&emsp;  unsigned int **numarPiese**  
+&emsp;  float **durata**  
+&emsp;  genMuzical **gen_muzical**  
 
 Clasa care contine un vector de clase de baza este **Comanda**:  
-  unsigned int **idComanda**  
-  char* **numeClient**  
-  char* **prenumeClient**  
-  float **valoareComanda**  
-  int **numarProduse**  
-  Produs(**) **numarProduse**;  
+&emsp;  unsigned int **idComanda**  
+&emsp;  char* **numeClient**  
+&emsp;  char* **prenumeClient**  
+&emsp;  float **valoareComanda**  
+&emsp;  int **numarProduse**  
+&emsp;  Produs(**) **numarProduse**;  
 
 Fisierul dependencies.h contine declararile enum-urilor folosite in cadrul proiectului:  
-Status  
-  Activ,  
-  Inactiv  
+Status:  
+&emsp;  Activ,  
+&emsp;  Inactiv  
 
-Categorie  
-  Carte,  
-  Vinyluri,  
-  Nedefinit  
+Categorie:  
+&emsp;  Carte,  
+&emsp;  Vinyluri,  
+&emsp;  Nedefinit  
 
-genLiterar  
-  Filosofie,  
-  IstoriaReligiilor,  
-  Istorie,  
-  Proza,  
-  Poezie,  
-  Psihologie,  
-  LiterarNedefinit  
+genLiterar:  
+&emsp;  Filosofie,  
+&emsp;  IstoriaReligiilor,  
+&emsp;  Istorie,  
+&emsp;  Proza,  
+&emsp;  Poezie,  
+&emsp;  Psihologie,  
+&emsp;  LiterarNedefinit  
 
-genMuzical  
-  Rock,  
-  Metal,  
-  Clasica,  
-  Pop,  
-  Populara,  
-  MuzicalNedefinit  
+genMuzical:  
+&emsp;  Rock,  
+&emsp;  Metal,  
+&emsp;  Clasica,  
+&emsp;  Pop,  
+&emsp;  Populara,  
+&emsp;  MuzicalNedefinit  
 
 Fisierul dependencies.cpp contine supraincarcarea operatorilor << si >> pentru fiecare enum in parte.  
 
