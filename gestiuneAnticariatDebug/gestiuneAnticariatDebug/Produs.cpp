@@ -111,7 +111,6 @@ void Produs::writeBinary(ofstream& ofs) //virtual
 	ofs.write((char*)&this->stoc, sizeof(this->stoc));
 	ofs.write((char*)&this->pret, sizeof(this->pret));
 	ofs.write((char*)&this->statusProdus, sizeof(this->statusProdus));
-	cout << "Am scris in produs." << endl;
 }
 
 Produs *Produs::readBinary(ifstream& ifs)
@@ -135,8 +134,6 @@ Produs *Produs::readBinary(ifstream& ifs)
 	ifs.read((char*)&statusTemp, sizeof(statusTemp));
 
 	Produs* pTemp = new Produs(idProdusTemp, stocTemp, pretTemp, statusTemp);
-	cout << "Citesc produsul din fisierul binar: " << endl;
-
 	return pTemp;
 }
 

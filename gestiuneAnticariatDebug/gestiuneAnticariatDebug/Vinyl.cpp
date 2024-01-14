@@ -257,4 +257,5 @@ Vinyl::~Vinyl()
 {
 	delete[] this->numeAlbum;
 	delete[] this->artist;
+	Produs::~Produs();
 }

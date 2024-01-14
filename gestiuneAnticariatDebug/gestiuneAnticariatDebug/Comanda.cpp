@@ -183,12 +183,12 @@ Produs* Comanda::operator[](int index)
 {
 	if (index >= this->numarProduse || index < 0)
 		throw out_of_range("Index invalid");
-	return this->produse[index];
+	return this->produse[index-1];
 }
 
 ostream& operator<<(ostream& os, const Comanda& c)
 {
-	os << "id comanda" << c.idComanda << endl;
+	os << "id comanda: " << c.idComanda << endl;
 	os << "nume client: " << c.numeClient << endl;
 	os << "prenume client: " << c.prenumeClient << endl;
 	os << "valoare comanda: " << c.valoareComanda << endl;
@@ -212,6 +212,16 @@ istream& operator>>(istream& is, Comanda& c)
 	cout << "Introduceti valoarea comenzii";
 	cin >> c.valoareComanda;
 	//TODO: Introducem categoria. Facem Carte::read() sau Vinyl::read();
+	cout << "Introduceti numarul de produse: " << endl;
+	cin >> c.numarProduse;
+	if (c.produse != NULL) {
+		delete[] c.produse;
+	}
+	c.produse = new Produs*[c.numarProduse];
+	for (int i = 0; i < c.numarProduse; i++) {
+		c.produse[i] = new Produs();
+		cin >> c.produse[i];
+	}
 
 	return is;
 }

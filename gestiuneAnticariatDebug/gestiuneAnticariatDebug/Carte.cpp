@@ -335,4 +335,5 @@ Carte::~Carte()
 	delete[] this->titlu;
 	delete[] this->autor;
 	delete[] this->editura;
+	Produs::~Produs();
 }
