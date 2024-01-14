@@ -5,8 +5,8 @@ Tema proiectului: Sistem de gestiune pentru o librarie anticariat.
 Structura proiectului:  
 
 Clasa de baza este **Produs**, care contine:  
-&emsp;unsigned int **idProdus**  
-&emsp;unsigned int **stoc**  
+&emsp;  unsigned int **idProdus**  
+&emsp;  unsigned int **stoc**  
 &emsp;  float **pret**  
 &emsp;  Status **statusProdus**  
 
